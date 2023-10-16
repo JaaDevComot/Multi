@@ -37,6 +37,7 @@ const quoted = (fatkuns.mtype == 'buttonsMessage') ? fatkuns[Object.keys(fatkuns
 const mime = (quoted.msg || quoted).mimetype || ''
 const qmsg = (quoted.msg || quoted)
 const isMedia = /image|video|sticker|audio/.test(mime)
+const from = m.key.remoteJid
 	
 // Group
 const groupMetadata = m.isGroup ? await uno.groupMetadata(m.chat).catch(e => {}) : ''
