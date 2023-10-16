@@ -74,7 +74,7 @@ uno.sendMessage(m.chat, { image: buf, caption: `Done kak` })
 }
 break
 case "tiktok": {
-if (!text) throw reply(`Example : ${prefix + command} https://vm.tiktok.com/ZSLdF9NYN`)
+if (!text) throw `Example : ${prefix + command} https://vm.tiktok.com/ZSLdF9NYN`
 reply(mess.wait)
 let tik = await fetchJson(`https://api.tiklydown.me/api/download?url=${text}`)
 let vidtik = await uno.sendMessage(from, { video: { url: tik.video.noWatermark }, caption: `Done kak` })
