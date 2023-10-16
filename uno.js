@@ -17,7 +17,7 @@ const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc')
 
-const fpay = { key: { remoteJid: '0@s.whatsapp.net', fromMe: false, id: global.packname, participant: '0@s.whatsapp.net'}, message: { requestPaymentMessage: { currencyCodeIso4217: "USD", amount1000: 999999999, requestFrom: '0@s.whatsapp.net', noteMessage: { extendedTextMessage: { text: global.packname}}, expiryTimestamp: 999999999, amount: { value: 91929291929, offset: 1000, currencyCode: "IDR"}}}}
+const fpay = { key: { remoteJid: '0@s.whatsapp.net', fromMe: false, id: global.packname, participant: '0@s.whatsapp.net'}, message: { requestPaymentMessage: { currencyCodeIso4217: "IDR", amount1000: 999999999, requestFrom: '0@s.whatsapp.net', noteMessage: { extendedTextMessage: { text: global.packname}}, expiryTimestamp: 999999999, amount: { value: 91929291929, offset: 1000, currencyCode: "IDR"}}}}
 
 module.exports = uno = async (uno, m, chatUpdate, store) => {
 try {
@@ -49,7 +49,7 @@ const isPremium = isCreator || global.premium.map(v => v.replace(/[^0-9]/g, '') 
 
 //reply
 const reply = (teks) => {
-return uno.sendMessage(m.chat, { text: teks ,contextInfo:{forwardingScore: 9999999, isForwarded: true}}, { quoted : fpay })
+return uno.sendMessage(m.chat, { text: teks ,contextInfo:{forwardingScore: 9999999, isForwarded: false}}, { quoted : fpay })
 }
 
 if (m.message) {
@@ -69,7 +69,14 @@ case 'sertitolol': {
 if (!text) throw `Example: ${prefix + command} username`
 reply(mess.wait)
 let buf = await getBuffer(`https://tolol.ibnux.com/img.php?nama=${q}`)
-uno.sendMessage(m.chat, { image: buf, caption: `done` }, { quoted: m})
+uno.sendMessage(m.chat, { image: buf, caption: `Done kak` })
+}
+break
+case "tiktok": {
+if (!text) throw reply(`Example : ${prefix + command} https://vm.tiktok.com/ZSLdF9NYN`)
+reply(mess.wait)
+let tik = await fetchJson(`https://api.tiklydown.me/api/download?url=${text}`)
+let vidtik = await uno.sendMessage(from, { video: { url: tik.video.noWatermark }, caption: `Done kak` })
 }
 break
 default:
